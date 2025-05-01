@@ -131,60 +131,66 @@ settings:
   }, [outputFormat]);
 
   return (
-    <Container maxWidth='lg' sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
         <img
-          src='/favicon.png'
-          alt='YAML Validator Logo'
+          src="/favicon.png"
+          alt="YAML Validator Logo"
           style={{
             width: '40px',
             height: '40px',
             objectFit: 'contain',
           }}
         />
-        <Typography variant='h4'>YAML Validator</Typography>
+        <Typography variant="h4">YAML Validator</Typography>
       </Box>
+      <p>
+        Created and maintained by{' '}
+        <a href="https://vinod.co" target="_blank" rel="noopener noreferrer">
+          Vinod Kumar Kayartaya
+        </a>
+      </p>
 
       <Box sx={{ mb: 2 }}>
         <ToggleButtonGroup
           value={outputFormat}
           exclusive
           onChange={(e, newFormat) => newFormat && setOutputFormat(newFormat)}
-          aria-label='output format'
+          aria-label="output format"
         >
-          <ToggleButton value='json'>JSON</ToggleButton>
-          <ToggleButton value='python'>Python</ToggleButton>
-          <ToggleButton value='canonical'>Canonical YAML</ToggleButton>
+          <ToggleButton value="json">JSON</ToggleButton>
+          <ToggleButton value="python">Python</ToggleButton>
+          <ToggleButton value="canonical">Canonical YAML</ToggleButton>
         </ToggleButtonGroup>
       </Box>
 
       <Box sx={{ mb: 2, display: 'flex', gap: 1 }}>
         <TextField
           fullWidth
-          label='Validate YAML from URL'
+          label="Validate YAML from URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder='https://example.com/config.yaml'
+          placeholder="https://example.com/config.yaml"
         />
-        <Button variant='contained' onClick={handleUrlValidate}>
+        <Button variant="contained" onClick={handleUrlValidate}>
           Validate URL
         </Button>
-        <Button variant='outlined' onClick={loadExample}>
+        <Button variant="outlined" onClick={loadExample}>
           Load Example
         </Button>
       </Box>
 
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
         <Paper elevation={3} sx={{ p: 2 }}>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant="h6" gutterBottom>
             Input
           </Typography>
           <Editor
-            height='400px'
-            defaultLanguage='yaml'
+            height="400px"
+            defaultLanguage="yaml"
             value={yamlInput}
             onChange={handleEditorChange}
-            theme='vs-light'
+            theme="vs-light"
             options={{
               minimap: { enabled: false },
               fontSize: 14,
@@ -201,10 +207,10 @@ settings:
               mb: 1,
             }}
           >
-            <Typography variant='h6'>Output</Typography>
+            <Typography variant="h6">Output</Typography>
             {!error && output && (
-              <Tooltip title='Copy to clipboard'>
-                <IconButton onClick={handleCopy} size='small'>
+              <Tooltip title="Copy to clipboard">
+                <IconButton onClick={handleCopy} size="small">
                   <ContentCopyIcon />
                 </IconButton>
               </Tooltip>
@@ -216,10 +222,10 @@ settings:
             </Box>
           ) : (
             <Editor
-              height='400px'
+              height="400px"
               defaultLanguage={outputFormat === 'json' ? 'json' : 'python'}
               value={output}
-              theme='vs-light'
+              theme="vs-light"
               options={{
                 readOnly: true,
                 minimap: { enabled: false },
@@ -229,11 +235,32 @@ settings:
           )}
         </Paper>
       </Box>
+      <Box
+        sx={{
+          mt: 4,
+          pt: 2,
+          borderTop: '1px solid #eee',
+          textAlign: 'center',
+          color: 'text.secondary',
+          fontSize: '0.875rem',
+        }}
+      >
+        © {new Date().getFullYear()}{' '}
+        <a
+          href="https://vinod.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'inherit', textDecoration: 'underline' }}
+        >
+          Vinod Kumar Kayartaya
+        </a>
+        . All rights reserved.
+      </Box>
       <Snackbar
         open={showCopySuccess}
         autoHideDuration={2000}
         onClose={handleCloseCopySuccess}
-        message='Copied to clipboard!'
+        message="Copied to clipboard!"
       />
     </Container>
   );
